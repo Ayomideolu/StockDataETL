@@ -21,3 +21,17 @@ def extract_data():
     combined_data = pd.concat(list_of_df)
     combined_data.to_csv('data/ngx_stock_data.csv', index= False)
     print('Data Successfully written to a csv file')
+
+def transform():
+    stock_data = pd.read_csv('data/ngx_stock_data.csv')  # Read csv file
+    # Print existing column names
+    print("Existing column names:", stock_data.columns)
+    current_date = datetime.today().strftime("%Y-%m-%d")
+    stock_data['date'] = current_date  # Change 'Date' to 'date'
+    stock_data.columns = stock_data.columns.str.lower()
+    # Re-arrange columns
+    stock_data = stock_data[['date', 'ticker', 'name', 'volume', 'price', 'change']] 
+    stock_data.to_csv('ngx_stock_data.csv', index=False)
+    print('Data transformed and written to a csv file')
+
+
