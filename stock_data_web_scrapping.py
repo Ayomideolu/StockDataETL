@@ -35,3 +35,7 @@ def transform():
     print('Data transformed and written to a csv file')
 
 
+def load_to_db():
+    data = pd.read_csv("ngx_stock_data.csv", index_col=False)
+    data.to_sql('stock_db', con=get_database_conn(), if_exists = 'replace',index = False)
+    print('Data loaded successfully to prosgres')
